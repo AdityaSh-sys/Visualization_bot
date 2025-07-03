@@ -4,8 +4,7 @@ matplotlib
 seaborn
 openpyxl
 sentence-transformers
-chromadb
+chromadb==0.4.24
 requests
 python-dotenv
-python_version == 3.11
 protobuf==3.20.*
