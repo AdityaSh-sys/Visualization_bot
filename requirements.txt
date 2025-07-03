@@ -7,3 +7,5 @@ sentence-transformers
 chromadb
 requests
 python-dotenv
+python_version == 3.11
+protobuf==3.20.*
