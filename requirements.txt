@@ -8,4 +8,4 @@ chromadb==0.4.24
 requests
 python-dotenv
 protobuf==3.20.*
-numpy>=1.26.0
+numpy<2.0
