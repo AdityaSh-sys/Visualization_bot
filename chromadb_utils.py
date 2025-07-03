@@ -1,20 +1,22 @@
 import chromadb
 from chromadb.config import Settings
 
-# Use DuckDB instead of SQLite
-client = chromadb.Client(Settings(
+# ✅ Explicitly force DuckDB+Parquet and AVOID SQLite completely
+settings = Settings(
     chroma_db_impl="duckdb+parquet",
-    persist_directory="./chroma_db_storage"  # folder for storage
-))
+    persist_directory="./chroma_db_storage",  # or None if no persistence is needed
+)
+
+# ✅ Create client using only DuckDB backend
+client = chromadb.Client(settings)
 
 def get_chroma_client(collection_name="df_records"):
-    # Ensure the collection exists or create it
-    col_exists = any(c.name == collection_name for c in client.list_collections())
-    if col_exists:
-        col = client.get_collection(name=collection_name)
+    collections = client.list_collections()
+    existing_names = [col.name for col in collections]
+    if collection_name in existing_names:
+        return client.get_collection(name=collection_name)
     else:
-        col = client.create_collection(name=collection_name, metadata={"hnsw:space": "cosine"})
-    return col
+        return client.create_collection(name=collection_name, metadata={"hnsw:space": "cosine"})
 
 def upsert_embeddings(chroma_col, ids, embeddings, metadatas, documents):
     chroma_col.upsert(
