@@ -8,4 +8,4 @@ chromadb==0.4.24
 requests
 python-dotenv
 protobuf==3.20.*
-numpy<=1.24.3
+numpy>=1.26.0  # ✅ Compatible with Python 3.13
