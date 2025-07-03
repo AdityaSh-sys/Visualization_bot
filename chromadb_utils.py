@@ -1,16 +1,17 @@
 import chromadb
 from chromadb.config import Settings
 
-# ✅ Explicitly force DuckDB+Parquet and AVOID SQLite completely
+# ✅ Use DuckDB + Parquet, completely avoiding SQLite
 settings = Settings(
     chroma_db_impl="duckdb+parquet",
-    persist_directory="./chroma_db_storage",  # or None if no persistence is needed
+    persist_directory=None  # ✅ disables persistence to avoid SQLite dependency
 )
 
-# ✅ Create client using only DuckDB backend
+# ✅ Create an in-memory Chroma client (safe for Streamlit Cloud)
 client = chromadb.Client(settings)
 
 def get_chroma_client(collection_name="df_records"):
+    # ✅ Avoid SQLite by using in-memory collection logic
     collections = client.list_collections()
     existing_names = [col.name for col in collections]
     if collection_name in existing_names:
