@@ -1,4 +1,11 @@
 import chromadb
+from chromadb.config import Settings
+
+client = chromadb.Client(Settings(
+    chroma_db_impl="duckdb+parquet",
+    persist_directory=None  # disables persistence entirely
+))
+
 
 def get_chroma_client(collection_name="df_records"):
     client = chromadb.PersistentClient(path="./chroma_db_storage")
