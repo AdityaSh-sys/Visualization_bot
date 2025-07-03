@@ -6,7 +6,7 @@ from llama_utils import query_llama_groq
 from plot_utils import try_execute_code
 from hybrid_prompt_utils import build_rag_prompt
 
-st.set_page_config(page_title="Hybrid Data Chat", page_icon="🦙", layout="wide")
+st.set_page_config(page_title="Hybrid Data Chat", page_icon="🢙", layout="wide")
 
 # -- Sidebar Setup --
 st.sidebar.header("🔖 Document Setup")
@@ -48,7 +48,7 @@ else:
 # -- MAIN PAGE CHAT UI --
 st.markdown(
     """
-    <h1 style='display:flex; align-items:center; gap:12px;'>🦙 Data Chatbot</h1>
+    <h1 style='display:flex; align-items:center; gap:12px;'>🢙 Data Chatbot</h1>
     <p>Intelligent data analysis with visualization. <br>
     <span style='color:gray;font-size:14px;'>Ask questions or request charts in plain English.</span></p>
     """,
@@ -61,9 +61,9 @@ if st.session_state.data_df is not None:
     chat_area = st.container()
     icons = {
         "user": "🧑‍💻",
-        "bot": "🦙",
+        "bot": "🢙",
         "plot": "🖼️",
-        "code-debug": "🧩"
+        "code-debug": "🧙"
     }
     for msg in st.session_state.chat_history:
         if msg["role"] == "user":
